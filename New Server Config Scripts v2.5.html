@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>EC2 Bitnami WordPress Setup Scripts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
+          <link rel="stylesheet" href="./mbr-additional.css">
+
+  <style>
+body {
+	font: 400 15px Lato, sans-serif;
+	line-height: 1.8;
+	color: #818181;
+}
+h2 {
+	font-size: 24px;
+	text-transform: uppercase;
+	color: #303030;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+h4 {
+	font-size: 19px;
+	line-height: 1.375em;
+	color: #303030;
+	font-weight: 400;
+	margin-bottom: 30px;
+}
+.jumbotron {
+	background-color: #f4511e;
+	color: #fff;
+	padding: 100px 25px;
+	font-family: Montserrat, sans-serif;
+}
+.container-fluid {
+	padding: 10px 50px;
+  
+    
+}
+.col-container {
+  display: table;
+  width: 100%;
+}
+.col {
+  display: table-cell;
+  padding: 16px;
+}      
+      
+      
+.bg-grey {
+	background-color: #f6f6f6;
+}
+.logo-small {
+	color: #f4511e;
+	font-size: 50px;
+}
+.logo {
+	color: #f4511e;
+	font-size: 200px;
+}
+.thumbnail {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+.thumbnail img {
+	width: 100%;
+	height: 100%;
+	margin-bottom: 10px;
+}
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+	color: #f4511e;
+}
+.carousel-indicators li {
+	border-color: #f4511e;
+}
+.carousel-indicators li.active {
+	background-color: #f4511e;
+}
+.item h4 {
+	font-size: 19px;
+	line-height: 1.375em;
+	font-weight: 400;
+	font-style: italic;
+	margin: 70px 0;
+}
+.item span {
+	font-style: normal;
+}
+.panel {
+	border: 1px solid #f4511e;
+	border-radius: 0 !important;
+	transition: box-shadow 0.5s;
+}
+.panel:hover {
+	box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+}
+.panel-footer .btn:hover {
+	border: 1px solid #f4511e;
+	background-color: #fff !important;
+	color: #f4511e;
+}
+.panel-heading {
+	color: #fff !important;
+	background-color: #f4511e !important;
+	padding: 25px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.panel-footer {
+	background-color: white !important;
+	text-align: center;
+}
+.panel-footer h3 {
+	font-size: 32px;
+}
+.panel-footer h4 {
+	color: #aaa;
+	font-size: 14px;
+}
+.panel-footer .btn {
+	margin: 15px 0;
+	background-color: #f4511e;
+	color: #fff;
+}
+
+footer .glyphicon {
+	font-size: 20px;
+	margin-bottom: 20px;
+	color: #f4511e;
+}
+.slideanim {
+	visibility: hidden;
+}
+.slide {
+	animation-name: slide;
+	-webkit-animation-name: slide;
+	animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+	visibility: visible;
+}
+.panel-heading-1 {
+	color: #fff !important;
+	background-color: #006cf9 !important;
+	padding: 25px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.panel-1 {
+	border: 1px solid #00bf26;
+	border-radius: 0 !important;
+	transition: box-shadow 0.5s;
+}
+.panel-heading-2 {
+	color: #fff !important;
+	background-color: #8d00f9 !important;
+	padding: 25px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}	  
+      
+.panel-heading-3 {
+	color: #fff !important;
+	background-color: #20b712 !important;
+	padding: 25px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}	  
+      
+.panel-heading-4 {
+	color: #fff !important;
+	background-color: #e00f66 !important;
+	padding: 25px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+      
+      code {
+   font: 13px Monaco;
+}
+pre {
+   background: #333;
+   color: white;
+   padding: 20px;
+   margin: 0 0 20px 0; /* Probably the same as paragraphs */
+}
+      
+ @keyframes slide {
+ 0% {
+ opacity: 0;
+ transform: translateY(70%);
+}
+ 100% {
+ opacity: 1;
+ transform: translateY(0%);
+}
+}
+ @-webkit-keyframes slide {
+ 0% {
+ opacity: 0;
+ -webkit-transform: translateY(70%);
+}
+ 100% {
+ opacity: 1;
+ -webkit-transform: translateY(0%);
+}
+}
+
+@media screen and (max-width: 768px) {
+.col-sm-4 {
+	text-align: center;
+	margin: 25px 0;
+}
+.btn-lg {
+	width: 100%;
+	margin-bottom: 35px;
+}
+}
+
+@media screen and (max-width: 480px) {
+.logo {
+	font-size: 150px;
+}
+}
+      /*! Buttons */
+.mbr-section-btn {
+  margin-left: -.25rem;
+  margin-right: -.25rem;
+  font-size: 0; }
+
+nav .mbr-section-btn {
+  margin-left: 0rem;
+  margin-right: 0rem; }
+
+      .navbar {
+          max-height: 100px;
+      }
+
+ .dropdown-toggle  {
+          
+      }
+/*! Btn icon margin */
+.btn .mbr-iconfont, .btn.btn-sm .mbr-iconfont {
+  cursor: pointer;
+  margin-right: 0.5rem; }
+
+.btn.btn-md .mbr-iconfont, .btn.btn-md .mbr-iconfont {
+  margin-right: 0.8rem; }
+
+.mbr-regular {
+  font-weight: 400; }
+
+.mbr-semibold {
+  font-weight: 500; }
+
+.mbr-bold {
+  font-weight: 700; }
+      
+
+[type="submit"] {
+  -webkit-appearance: none; }
+</style>
+  </head>
+  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<!--
+      <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="#myPage"><img src="https://s3-us-east-2.amazonaws.com/jettlife-connect/2018-JLT/2018/12/26170424/JETTLIFE-TECH-LOGO-SQUARE%4075px.png" alt="JETTLIFE TECH" > </a> </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="#ssl">SSL SETUP</a></li>
+        <li><a href="#modsinstall">MODULES Install</a></li>
+        <li><a href="#ioncube">IonCube</a></li>
+        <li><a href="https://s3.us-east-2.amazonaws.com/cdn.protowllc.com/create-new-folder.html">Create New Folder</a></li>
+        <li><a href="#unix">Unix-Scripts</a></li>
+        <li><a href="#apache">Apache</a></li>
+            
+      </ul>
+      </div>
+  </div>
+  </nav>
+-->
+      <nav class="navbar navbar-expand-sm navbar-inverse navbar-dark navbar-fixed-top ">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        
+      <a class="navbar-brand" href="https://jettlifetech.com">JETTLIFE TECH</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#ssl">Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Module Install
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#ioncube">IonCube</a></li>
+          
+        </ul>
+      </li>
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quick Scripts
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#ssl">Remove Bitnami Banner</a></li>
+          <li><a href="#https">http(s) wp-config</a></li>
+          <li><a href="#"> </a></li>
+        </ul>
+      </li>
+      <li><a href="#newfolder">Create New Folder</a></li>
+      <li><a href="#apache">Apache Scripts</a></li>
+    <li><a href="#wordpress">WordPress Scripts</a></li>
+        <li><a href="#wordpress">WordPress Plugins</a></li>
+        <li><a href="#awscli">AWS CLI </a></li>
+        <li><a href="https://1drv.ms/f/s!An9dnTSnbUTRrrdTq5_2e6HI7a17KQ#s3">S3 Bucket Configs</a></li>
+        
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron text-center">
+    <img src="https://s3-us-east-2.amazonaws.com/jettlife-connect/2018-JLT/2019/01/04213436/JETTLIFE-TECH-LOGO-SQUARE%4075px.png" alt="JETTLIFE TECH" width="10%" height="auto">
+    <h1>New Server Launch Script</h1>
+  </div>
+<div class="col-container" >      
+<div class="container-fluid" id="ssl">
+<div class="row">	  
+    <h2 style="text-align: center">SSL Install Scripts</h2>
+<!--SCRIPT 1 START -->	  
+<div class="col-sm-3 col-xs-12 col">
+    <div class="panel panel-default">
+    <div class="panel-heading-1">
+        <h1>Remove Bitnami Banner</h1>
+      </div>
+    <div class="panel-body">
+        <p id="p1">sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1 && sudo /opt/bitnami/ctlscript.sh restart apache</p>
+      </div>
+    <div class="panel-footer">
+        
+        <button class="btn btn-lg" onclick="copyToClipboard('#p1')">Copy</button>
+      </div>
+  </div>
+  </div>
+<!--SCRIPT 1 END -->
+	  
+<!--SCRIPT 2 START -->
+<div class="col-sm-3 col-xs-12 col">
+    <div class="panel panel-default">
+    <div class="panel-heading-1">
+        <h1>Script 2</h1>
+        <ol>
+        <li>Install SSL</li>
+      </ol>
+        <p><em><strong>Pre-Requisite</strong></em><br>
+        Static IP or Elastic IP is set to www.Mydomain.com</p>
+      </div>
+    <div class="panel-body">
+        <p>Modify "-m" & both "-d" one with "www."</p>
+        <textarea id="textarea" rows="4" cols="45">sudo /opt/bitnami/letsencrypt/scripts/generate-certificate.sh -m daine@protowllc.com -d FreakyFastTowing.com -d www.freakyfasttowing.com</textarea>
+      </div>
+    <div class="panel-footer">
+        <button class="btn btn-lg" onclick="copy()">Copy</button>
+      </div>
+  </div>
+  </div>
+
+<!--SCRIPT 2 End --> 
+	  
+<!--SCRIPT 3 START -->	  
+<div class="col-sm-3 col-xs-12 col">
+    <div class="panel panel-default">
+    <div class="panel-heading-1">
+        <h1 id="https">Script 3</h1>
+        <ol>
+			<li>Adds "S" to Http Url declration in WP-CONFIG.php</li>        
+      </ol>
+      </div>
+    <div class="panel-body">
+        <p id="p3">sed '97,101 s/http/https/g' /opt/bitnami/apps/wordpress/htdocs/wp-config.php > /opt/bitnami/apps/wordpress/htdocs/tmp.txt && mv /opt/bitnami/apps/wordpress/htdocs/tmp.txt /opt/bitnami/apps/wordpress/htdocs/wp-config.php;</p>
+      </div>
+    <div class="panel-footer">
+        <button class="btn btn-lg" onclick="copyToClipboard('#p3')">Copy</button>
+      </div>
+  </div>
+  </div>
+	 
+	  
+<!--SCRIPT 1 END -->
+	  
+<!--SCRIPT 4 START -->	  
+<div class="col-sm-3 col-xs-12">
+    <div class="panel panel-default">
+    <div class="panel-heading-1">
+        <h1>Update WordPress Plugins, Themes, and core</h1>
+     
+      </div>
+    <div class="panel-body">
+        <p id="p4">sudo wp plugin update --all --allow-root && sudo wp theme update --all --allow-root && sudo wp core update --allow-root</p>
+      </div>
+    <div class="panel-footer">
+        <button class="btn btn-lg" onclick="copyToClipboard('#p4')">Copy</button>
+      </div>
+  </div>
+  </div>
+	  </div>	 
+	  </div>	  
+      </div>	  
+<!--SCRIPT 1 END -->
+<div class="container-fluid" id="unix">
+  <h2 id="apache" style="text-align: center" >Apache scripts</h2>
+    
+
+	
+	
+	
+  <div class="row" >
+   	<div class="col-sm-3" >
+    		<div class="panel panel-primary">
+     		 	<div class="panel-heading">Remove Bitnami Banner</div>
+     		 	<div class="panel-body">
+             		<p id="p5">sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1 && sudo /opt/bitnami/ctlscript.sh restart apache</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p5')">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading">Restart Apache</div>
+     		 	<div class="panel-body">
+             		<p id="p6">sudo /opt/bitnami/ctlscript.sh restart apache</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p6')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading">See server module status</div>
+     		 	<div class="panel-body">
+             		<p id="p7">sudo /opt/bitnami/ctlscript.sh status</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p7')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading">Permission Issue Fix</div>
+     		 	<div class="panel-body">
+             		<p id="pdad7">sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/ && sudo chmod -R 775 /opt/bitnami/apps/wordpress/htdocs/</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#pdad7')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+  </div>
+</div>	  
+	  
+	  
+<div class="container-fluid">
+  <h2 id="modsinstall" style="text-align: center">INSTALL IonCube</h2>
+
+	
+					<!--START UNIX CODE SNIPPETS--> 
+	
+	
+  <div class="row" id="ioncube">
+   	<div class="col-sm-4">
+    		<div class="panel panel-success">
+     		 	<div class="panel-heading-2">
+					<h3 align="center">Step 1</h3>
+					<h3 align="center">Install IonCube</h3>
+				
+				</div>
+     		 	<div class="panel-body">
+             		<p id="p8">wget -qO- http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz | tar xvz -C /tmp; sudo cp /tmp/ioncube/ioncube_loader_lin_7.2.so /opt/bitnami/php/lib/php/extensions/ && sudo nano /opt/bitnami/php/etc/php.ini</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p8')">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+    <div class="col-sm-4">
+    	<div class="panel panel-success">
+     		 	<div class="panel-heading-2">
+					<h3 align="center">Step 2</h3>
+					<h3 align="center">Paste this at the top of PHP.INI</h3>
+				
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p9">zend_extension = /opt/bitnami/php/lib/php/extensions/ioncube_loader_lin_7.2.so</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p9')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+    <div class="col-sm-4">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading-2">
+					<h3 align="center">Step 3</h3>
+					<h3 align="center">Check extensions</h3>
+				<p>RESULT FROM COMMAND BLEOW</p>
+					<p><em>ionCube Loader<br>
+					the ionCube PHP Loader (enabled) + Intrusion Protection from ioncube24.com (unconfigured)</em></p>
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p10">php -m | grep -i ioncube</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p10')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+  </div>
+</div>		  
+
+<div class="container-fluid">
+  <h2 id="wordpress" style="text-align: center">WordPress Scripts</h2>
+
+	
+	
+  <div class="row" id="apache">
+   	<div class="col-sm-3">
+    		<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">WP-Rocket - Edit Permissions</h3>				
+				</div>
+     		 	<div class="panel-body">
+             		<p id="p18">sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/wp-content/cache && sudo find /opt/bitnami/apps/wordpress/htdocs/wp-content/cache -type f -exec chmod 664 {} \; && sudo find /opt/bitnami/apps/wordpress/htdocs/wp-content/cache -type d -exec chmod 775 {} \;  && sudo chown bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/wp-config.php && sudo chmod g+w /opt/bitnami/apps/wordpress/htdocs/wp-config.php && sudo chown bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/.htaccess && sudo chmod g+w /opt/bitnami/apps/wordpress/htdocs/.htaccess</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p18')">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center"> Download & Install WP-Rocket</h3>
+					
+				
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p19">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/jlt-files-cdn/plugins/wp-rocket_3.2.3.1.zip && unzip wp-rocket_3.2.3.1.zip && cd && wp plugin activate wp-rocket</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p19')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Edit wp-config</h3>
+					
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p110">sudo nano /opt/bitnami/apps/wordpress/htdocs/wp-config.php</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p110')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+    <div class="col-sm-3">
+    		<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Reset Bitnami Root User Account Password</h3>
+                    <ul>
+                    <li>Password must contain letters & Numbers</li>
+                    <li>Password must be 8+ digits long</li>
+                    </ul>
+                    <p>Change NEW_PASSWORD in Step 2 below</p>
+				</div>
+     		 	<div class="panel-body">
+                    <h4>Step 1</h4>
+             		<p id="p38">cd /opt/bitnami/apps/wordpress/</p>
+                    <h4>Step 2</h4>
+                    <textarea id="textarea6" rows="2" cols="45">sudo ./bnconfig --userpassword NEW_PASSWORD</textarea>
+                </div>
+             	<div class="panel-footer">
+                    
+       		 		<button class="btn2 btn-lg btn-primary" onclick="copyToClipboard('#p38')">Step 1</button>
+                    <button class="btn1 btn-lg btn-success" onclick="copy6()">Step 2</button>
+      			</div>
+   			</div>
+ 	   </div>
+  </div>
+</div>	
+      
+      
+<!--START -- WordPress Plugin section -->      
+      
+<div class="container-fluid">
+  <h2 id="wordpress" style="text-align: center">WordPress Plugin Scripts</h2>
+
+	
+	
+  <div class="row" id="apache">
+   	<div class="col-sm-3">
+    		<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Install & Activate Visual Composer</h3>
+                    <p>Date Uploaded: 04/15/2019 </p>
+                    <p>Version: 5.7 </p>
+				</div>
+     		 	<div class="panel-body">
+             		<p id="pzs18">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/jlt-files-cdn/plugins/js_composer.zip && unzip js_composer.zip && cd && wp plugin activate js_composer</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#pzs18')">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+      <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Install & Activate Unlimited Addons (UAkit)</h3>
+                    <p>Date Uploaded: 04/15/2019 </p>
+                    <p>Version: 1.0.40 </p>
+					
+			</div>
+     		 	<div class="panel-body">
+             		<p id="pzs10">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/jlt-files-cdn/plugins/unlimited-addons-for-wpbakery-page-builder1.0.26.zip && unzip unlimited-addons-for-wpbakery-page-builder1.0.26.zip && cd && wp plugin activate unlimited-addons-for-wpbakery-page-builder</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#pzs10')">Copy</button><br>
+                    <button class="button btn1 btn-lg btn-success" onClick="window.open('https://1drv.ms/f/s!An9dnTSnbUTRrrdTq5_2e6HI7a17KQ');"><span class="icon">View Add-ons & Page Templates to import</span></button>
+      			</div>
+   		</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">The Plus+ Add-On</h3>
+                    <p>Date Uploaded: 04/15/2019<br>
+                    Version: 2.1.2<br>
+                    Item Purchase Code: 4a4ba4d0-45b9-4566-bbb3-db84dfa41d67</p>				
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p19z">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/jlt-files-cdn/plugins/theplus_addon.zip && unzip theplus_addon.zip && cd && wp plugin activate theplus_addon</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p19z')">Copy</button>
+      			</div>
+   		</div>
+     </div>  
+      
+    <div class="col-sm-3">
+    	<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Install & Activate UpDraftPlus with Migrator</h3>
+                    <p>Date Uploaded: 04/15/2019</p>
+                    <p>Version: 2.16.3</p>
+					
+				
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p19zs">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/1-mob/wget+files/updraftPLUS/updraftplus-with-migrator.2.16.3.zip && unzip updraftplus-with-migrator.2.16.3.zip && cd && wp plugin activate updraftplus</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p19zs')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+      
+      <div class="col-sm-3">
+    	<div class="panel panel-success">
+     		 	<div class="panel-heading-3">
+					<h3 align="center">Install & Activate wp-rocket</h3>
+                    <p>Date Uploaded: 04/15/2019</p>
+                    <p>Version: 2.16.3</p>
+					
+				
+			</div>
+     		 	<div class="panel-body">
+             		<p id="p19zw">cd /opt/bitnami/apps/wordpress/htdocs/wp-content/plugins/ && wget https://s3.us-east-2.amazonaws.com/jlt-files-cdn/plugins/wp-rocket_3.2.3.1.zip && unzip wp-rocket_3.2.3.1.zip && cd && wp plugin activate wp-rocket</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p19zw')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+  </div>
+</div>
+      
+<!--END -- WordPress Plugin section -->      
+	  
+<div class="container-fluid" id="unix">
+  <h2 id="apache" style="text-align: center" >AWS CLI</h2>
+    
+
+	
+	
+	
+  <div class="row" >
+   	<div class="col-sm-3" >
+    		<div class="panel panel-primary">
+                <div class="panel-heading"><h3>Download Bucket Contents to local file storage</h3><p>Change your bucket name; must be a space between bucket name and "."</p></div>
+     		 	<div class="panel-body">
+             		
+                    <textarea id="textarea1" rows="2" cols="30">aws s3 sync s3://example-bucket .</textarea>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copy1()">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+            <div class="panel-heading"><h3>Synchronizing (updating Cloud Files)</h3></div>
+     		 	<div class="panel-body">
+             		<textarea id="textarea2" rows="2" cols="30">aws s3 sync . s3://example-bucket</textarea>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copy2()">Copy</button>
+      			</div>
+   		</div>
+     </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading"><h3>Invalidate Objects on CDN</h3></div>
+     		 	<div class="panel-body">
+                    <textarea id="textarea3" rows="3" cols="45">aws cloudfront create-invalidation --distribution-id E1PRDMRTTUYGOV --paths /*</textarea>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copy3()">Copy</button>
+      			</div>
+   		</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading">title</div>
+     		 	<div class="panel-body">
+             		<p id="p7">text</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p7')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+  </div>
+</div>	
+      
+<div class="container-fluid" id="unix">
+  <h2 id="newfolder" style="text-align: center">Create New Folders & S3 Bucket Public Config</h2>
+    
+
+	
+	
+	
+  <div class="row" >
+   	<div class="col-sm-3" >
+    		<div class="panel panel-primary">
+     		 	<div class="panel-heading-4"><h3>Create Folder on EC2 Bitnami WordPress</h3><p>Change YOUR_FOLDER_NAME</p></div>
+     		 	<div class="panel-body">
+             		<textarea id="textarea4" rows="8" cols="45">sudo mkdir /opt/bitnami/apps/wordpress/htdocs/YOUR_FOLDER_NAME && sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/YOUR_FOLDER_NAME && sudo chmod -R 775 /opt/bitnami/apps/wordpress/htdocs/YOUR_FOLDER_NAME</textarea>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copy4()">Copy</button>
+      			</div>
+   			</div>
+ 	   </div>
+    <div id="s3" class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading-4"><h3>Set S3 Bucket CORS Configuration</h3></div>
+     		 	<div class="panel-body">
+             		<p id="p6">sudo /opt/bitnami/ctlscript.sh restart apache</p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p6')">Copy</button>
+      			</div>
+   		</div>
+     </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+            <div class="panel-heading-4"><h3>Set S3 Bucket CORS Configuration</h3><p>add</p> <pre><</pre><p> to the beggining of every html tag below </p></div>
+     		 	<div class="panel-body">
+                    <p id="p27"><pre><code>
+    ?xml version="1.0" encoding="UTF-8"?>
+    CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                    CORSRule>
+    AllowedOrigin>*/AllowedOrigin>
+    AllowedMethod>GET/AllowedMethod>
+    MaxAgeSeconds>3000/MaxAgeSeconds>
+    AllowedHeader>Authorization/AllowedHeader>
+    AllowedHeader>Content-Length/AllowedHeader>
+/CORSRule >
+/CORSConfiguration>
+                        </code></pre></p>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copyToClipboard('#p27')">Copy</button>
+      			</div>
+   		</div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="panel panel-primary">
+     		 	<div class="panel-heading-4"><h3>Set S3 Bucket Policy</h3><p>makes bucket contents public</p></div>
+     		 	<div class="panel-body">
+    <textarea id="textarea5" rows="16" cols="45">{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::prairievillagetowing.com/*"
+        }
+    ]
+}</textarea>
+                </div>
+             	<div class="panel-footer">
+       		 		<button class="btn btn-lg" onclick="copy5()">Copy</button>
+      			</div>
+   		</div>
+    </div>
+  </div>
+</div>	
+      
+      
+<!--	
+<input type="text" size="80" value="sudo /opt/bitnami/letsencrypt/scripts/generate-certificate.sh -m daine@protowllc.com -d FreakyFastTowing.com" id="myInput" width="85"></input>
+<input type="text" value="sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1 && sudo /opt/bitnami/ctlscript.sh restart apache" id="myInput">
+	<button onclick="myFunction()">Copy text</button>
+	--> 
+<script>
+    function copy1() {
+  let textarea = document.getElementById("textarea1");
+  textarea.select();
+  document.execCommand("copy");
+}
+function copy2() {
+  let textarea = document.getElementById("textarea2");
+  textarea.select();
+  document.execCommand("copy");
+}
+    function copy3() {
+  let textarea = document.getElementById("textarea3");
+  textarea.select();
+  document.execCommand("copy");
+}
+    function copy4() {
+  let textarea = document.getElementById("textarea4");
+  textarea.select();
+  document.execCommand("copy");
+}
+ function copy5() {
+  let textarea = document.getElementById("textarea5");
+  textarea.select();
+  document.execCommand("copy");
+}    
+function copy6() {
+  let textarea = document.getElementById("textarea6");
+  textarea.select();
+  document.execCommand("copy");
+}    
+    
+ 
+    
+	function copy() {
+  let textarea = document.getElementById("textarea");
+  textarea.select();
+  document.execCommand("copy");
+}
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
+</script> 
+<script>
+
+function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
+</script> 
+<script>
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+</script>
+</body>
+</html>
